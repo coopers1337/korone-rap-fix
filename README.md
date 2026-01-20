@@ -1,2 +1,2 @@
-<a href="https://raw.githubusercontent.com/coopers1337/korone-rap-fix/main/index.js?user.js">Install to ViolentMonkey / Tampermonkey</a>
+<a href="https://raw.githubusercontent.com/coopers1337/korone-rap-fix/main/index.user.js">Install to ViolentMonkey / Tampermonkey</a>
 - cooper was here!
