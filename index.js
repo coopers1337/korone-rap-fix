@@ -6,6 +6,7 @@
 // @description  Replaces "..." with real inventory RAP
 // @run-at       document-idle
 // @icon         https://files.catbox.moe/cyolc9.png
+// @author       cooper (coollarper45)
 // @grant        none
 // ==/UserScript==
 
