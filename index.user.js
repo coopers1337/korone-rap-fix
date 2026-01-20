@@ -2,7 +2,8 @@
 // @name         Korone.zip Inventory RAP Fix
 // @namespace    korone-rap-fix
 // @version      1.0
-// @match        https://www.pekora.zip/users/*/profile
+// @match        https://*.pekora.zip/users/*/profile
+// @match        https://*.korone.zip/users/*/profile
 // @description  Replaces "..." with real inventory RAP
 // @run-at       document-idle
 // @icon         https://files.catbox.moe/cyolc9.png
