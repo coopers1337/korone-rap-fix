@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Korone.zip Inventory RAP Fix
 // @namespace    korone-rap-fix
-// @version      1.0
+// @version      1.1
 // @match        https://*.pekora.zip/users/*/profile
 // @match        https://*.korone.zip/users/*/profile
 // @description  Replaces "..." with real inventory RAP
@@ -15,10 +15,15 @@
   "use strict";
 
   const API_BASE = "https://www.pekora.zip/apisite/users/v1/users/";
+  let lastUserId = null;
 
   function getUserId() {
     const m = location.pathname.match(/\/users\/(\d+)\/profile/);
     return m ? m[1] : null;
+  }
+
+  function getProfileRoot() {
+    return document.querySelector("main") || document.body;
   }
 
   async function fetchRAP(id) {
@@ -28,8 +33,8 @@
     return j.inventoryRap;
   }
 
-  function getRAPNode() {
-    for (const li of document.querySelectorAll("li")) {
+  function getRAPNode(root) {
+    for (const li of root.querySelectorAll("li")) {
       const h = li.querySelector("div");
       if (h && h.textContent.trim() === "RAP") {
         return li.querySelector("h3");
@@ -42,14 +47,21 @@
     const id = getUserId();
     if (!id) return;
 
-    const el = getRAPNode();
-    if (!el || el.dataset.done) return;
+    const root = getProfileRoot();
+    const el = getRAPNode(root);
+    if (!el) return;
+
+    if (lastUserId !== id) {
+      el.textContent = "...";
+      lastUserId = id;
+    }
+
+    if (el.textContent !== "...") return;
 
     const rap = await fetchRAP(id);
     if (typeof rap !== "number") return;
 
     el.textContent = rap.toLocaleString();
-    el.dataset.done = "1";
   }
 
   apply();
